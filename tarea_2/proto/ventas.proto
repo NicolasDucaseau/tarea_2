@@ -1,0 +1,49 @@
+
+syntax = "proto3";
+
+package ventas;
+
+option go_package = "/pb";  // Ajusta la ruta de importación según tu estructura de carpetas.
+
+
+message Product {
+    string title = 1;
+    string author = 2;
+    string genre = 3;
+    int32 pages = 4;
+    string publication = 5;
+    int32 quantity = 6;
+    float price = 7;
+}
+
+message Location {
+    string address1 = 1;
+    string address2 = 2;
+    string city = 3;
+    string state = 4;
+    string postalCode = 5;
+    string country = 6;
+}
+
+message Customer {
+    string name = 1;
+    string lastname = 2;
+    string email = 3;
+    Location location = 4;
+    string phone = 5;
+}
+
+message OrderRequest {
+    repeated Product products = 1;
+    Customer customer = 2;
+}
+
+message OrderResponse {
+    string message = 1;
+    float total = 2;
+}
+
+service SalesService {
+    rpc PlaceOrder(OrderRequest) returns (OrderResponse);
+}
+
